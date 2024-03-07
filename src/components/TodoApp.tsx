@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { AddTodoForm } from "./AddTodoForm"
 import { TodoFilter } from "./TodoFilter"
 import { TodoList } from "./TodoList"
-// import { NavBar } from "./NavBar";
 import "./style.css"
 import { TodoItem } from "../types/type"
 import NavBar from "./NavBar"

@@ -1,3 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* font-family: 'Nunito', sans-serif; */
+    text-align: center;
+    color: black;
+    background: #fff;
+}
+
+App {
+    max-width: 728px;
+    margin: 4rem auto;
+}
+
 .d-flex {
     display: flex;
 }
@@ -6,48 +24,14 @@
     gap: "12px";
 }
 
-/* Overall container styling */
-.todo-container {
-    text-align: center;
-    width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Individual to-do item styling */
-.TodoItems {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border-bottom: 1px solid teal;
-    cursor: pointer;
-}
-
-/* Completed to-do item styling */
-.todo-item.completed {
-    text-decoration: line-through;
-    opacity: 0.7;
-}
-
-/* Add to-do form styling */
-.add-todo-form {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
 /* Input field styling */
 input[type="text"] {
     padding: 10px;
     margin-top: 50px;
     margin-left: 540px;
+    align-items: center;
     border-radius: 5px;
     font-size: 16px;
-
 }
 
 /* Add button styling */
@@ -61,14 +45,10 @@ button {
     color: #fff;
 }
 
-/* Styling for the filter checkbox and label */
-todo-filter {
-    margin-bottom: 10px;
-}
 
 input[type="checkbox"] {
-    margin-right: 5px;
-    text-align: center;
+    margin-right: 10px;
+    margin-left: 580px;
 }
 
 /* Title styling */
@@ -78,12 +58,17 @@ h3 {
 }
 
 li {
-    margin: 10px 0;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
     text-align: center;
 }
 
 label {
     margin: 10px 0;
+    margin-left: 20px;
     text-align: center;
 }
 
