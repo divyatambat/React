@@ -43,7 +43,7 @@ function NavBar({ navName, navItems }: NavBarProps) {
                                             ? "nav-link active fw-bold"
                                             : "nav-link"
                                     }
-                                    href="home"
+                                    href="addtodo"
                                 >
                                     {items}
                                 </a>
