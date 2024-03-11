@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./style.css";
 
-interface NavBarProps {
+interface INavBarProps {
     navName: string;
     navItems: string[];
 }
 
-function NavBar({ navName, navItems }: NavBarProps) {
+function NavBar({ navName, navItems }: INavBarProps) {
     const [selectedIndex, setSelectedIndex] = useState(-1);
 
     return (
@@ -43,7 +43,7 @@ function NavBar({ navName, navItems }: NavBarProps) {
                                             ? "nav-link active fw-bold"
                                             : "nav-link"
                                     }
-                                    href="home"
+                                    href="addtodo"
                                 >
                                     {items}
                                 </a>

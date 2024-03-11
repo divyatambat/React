@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { AddTodoForm } from "./AddTodoForm"
 import { TodoFilter } from "./TodoFilter"
 import { TodoList } from "./TodoList"
 import "./style.css"
 import { TodoItem } from "../types/type"
+import { URL } from "../data/UrlApi"
 import NavBar from "./NavBar"
+import axios from "axios"
 
 export const TodoApp = () => {
     const [todos, setTodos] = useState<TodoItem[]>([])
@@ -12,43 +14,71 @@ export const TodoApp = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch("http://localhost:8000/todos")
+        fetch(URL)
             .then((res) => res.json())
             .then((response) => setTodos(response))
-        setLoading(false)
-    }, [])
+            .finally(() => setLoading(false));
+    }, []);
 
-    const addTodo = (title: string) => {
-        setTodos([...todos, { id: todos.length + 1, title, completed: false }]);
-    };
+    const addTodo = useCallback(
+        async (title: string, duedate: string) => {
+            if (!title || !duedate) {
+                console.warn("Please enter both title and due date");
+                return;
+            }
 
-    const displayedTodos = ShowCompleted
-        ? todos.filter((todo) => {
-            return todo.completed === true
-        })
-        : todos;
+            const newTodo = {
+                id: todos.length + 1,
+                title,
+                duedate,
+                isCompleted: false,
+            };
 
-    const markTodoCompleted = (id: number, completed: boolean) => {
+            try {
+                const response = await axios.post(URL, newTodo);
+                setTodos((prevTodos) => [...prevTodos, response.data]);
+            } catch (error) {
+                console.error('Error adding todo:', error);
+            }
+        },
+        [todos]
+    );
+
+    const displayedTodos = useMemo(
+        () =>
+            ShowCompleted
+                ? todos.filter((todo) => {
+                    return todo.isCompleted === true
+                })
+                : todos,
+        [todos, ShowCompleted]
+    )
+
+    const markTodoCompleted = useCallback((id: number, isCompleted: boolean) => {
         setTodos(
             todos.map((todo) => {
                 if (id === todo.id) {
-                    return { ...todo, completed: completed }
+                    return { ...todo, isCompleted: isCompleted }
                 } else {
                     return todo
                 }
             })
         )
-    }
+    }, [todos]);
 
     let items = ["Home", "Add Todo"];
     return (
-        <div>
+        <div style={{ padding: 10 }}>
             <NavBar
                 navName="TodoApp"
                 navItems={items} />
             <AddTodoForm addTodo={addTodo} />
             <TodoFilter showCompleted={ShowCompleted} setShowCompleted={setShowCompleted} />
-            {loading ? <p>Loading...</p> : <TodoList todos={displayedTodos} markTodoCompleted={markTodoCompleted} />}
+            {loading ? (
+                <p style={{ textAlign: "center" }}>Loading...</p>
+            ) : (
+                <TodoList todos={displayedTodos} markTodoCompleted={markTodoCompleted} />
+            )}
         </div>
     )
 };
