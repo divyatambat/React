@@ -1,6 +1,7 @@
+import { memo } from "react";
 import "./style.css";
 
-export const TodoFilter = ({
+export const TodoFilterComponent = ({
     setShowCompleted,
     showCompleted
 }: {
@@ -8,10 +9,11 @@ export const TodoFilter = ({
     setShowCompleted: (ShowCompleted: boolean) => void
 }) => {
     return (
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div>
             <input type="checkbox" id="filter" onChange={(e) => setShowCompleted(e.target.checked)} />
             <label htmlFor="filter">Completed</label>
         </div>
     )
 }
 
+export const TodoFilter = memo(TodoFilterComponent)

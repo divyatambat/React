@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Route path="/" element={<TodoApp />} />
         <Route path="/home" element={<TodoApp />} />
-        <Route path="/add" element={<div>adddd</div>} />
+        {/* <Route path="/add" element={<div>add</div>} /> */}
 
       </BrowserRouter>
     </div>
