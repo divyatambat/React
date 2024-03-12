@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../App.css"
+import "./style.css";
 
 interface NavBarProps {
     navName: string;
@@ -7,13 +7,12 @@ interface NavBarProps {
 }
 
 function NavBar({ navName, navItems }: NavBarProps) {
-
     const [selectedIndex, setSelectedIndex] = useState(-1);
 
     return (
         <nav className="navbar navbar-expand-md navbar-light bg-white shadow">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="home" style={{ marginLeft: "100px" }}>
                     <span className="fw-bolder fs-4">{navName}</span>
                 </a>
                 <button
@@ -28,10 +27,10 @@ function NavBar({ navName, navItems }: NavBarProps) {
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div
-                    className="collapse
-         navbar-collapse"
-                    id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-md-1">
+                    className="collapse navbar-collapse justify-content-end"
+                    id="navbarSupportedContent"
+                >
+                    <ul className="navbar-nav mb-2 mb-md-1" style={{ marginRight: "250px" }}>
                         {navItems.map((items, index) => (
                             <li
                                 key={items}
@@ -44,24 +43,13 @@ function NavBar({ navName, navItems }: NavBarProps) {
                                             ? "nav-link active fw-bold"
                                             : "nav-link"
                                     }
-                                    href="#"
+                                    href="home"
                                 >
                                     {items}
                                 </a>
                             </li>
                         ))}
                     </ul>
-                    {/* <form className="d-flex me-3">
-                        <input
-                            className="form-control me-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
-                        />
-                        <button className="btn btn-outline-success" type="submit">
-                            Search
-                        </button>
-                    </form> */}
                 </div>
             </div>
         </nav>

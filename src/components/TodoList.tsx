@@ -1,5 +1,6 @@
 import { TodoItem } from "../types/type"
 import { TodoListItems } from "./TodoListItems"
+import "./style.css";
 
 export const TodoList = (props: {
     todos: TodoItem[], markTodoCompleted: (id: number, completed: boolean) => void
@@ -15,3 +16,4 @@ export const TodoList = (props: {
         </div>
     )
 }
+

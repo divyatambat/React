@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./style.css";
 
 export const AddTodoForm = ({ addTodo }: { addTodo: (title: string) => void }) => {
     const [addTodoInput, setAddTodoInput] = useState("")

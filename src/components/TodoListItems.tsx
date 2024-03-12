@@ -1,3 +1,5 @@
+import "./style.css";
+
 export const TodoListItems = ({ completed, title, id, markTodoCompleted, }:
     {
         completed: boolean; title: string, id: number, markTodoCompleted: (id: number, completed: boolean) => void
