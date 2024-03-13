@@ -4,7 +4,7 @@
       "id": "1",
       "title": "Learn React",
       "duedate": "2024-03-05",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "2",
@@ -22,12 +22,18 @@
       "id": "4",
       "title": "Use Post API",
       "duedate": "2024-03-08",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "5",
       "title": "Do next asg",
       "duedate": "2024-03-09",
+      "isCompleted": false
+    },
+    {
+      "id": 6,
+      "title": "Use React Query",
+      "duedate": "2024-03-11",
       "isCompleted": false
     }
   ]

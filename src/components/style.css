@@ -1,10 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
+.todo {
     box-sizing: border-box;
 }
 
-body {
+.TodoApp body {
     text-align: center;
     color: black;
     background: #fff;
@@ -21,38 +19,73 @@ body {
 /* Input field styling */
 input[type="text"] {
     padding: 10px;
-    margin-top: 50px;
+    margin-bottom: 10px;
     margin-left: 420px;
     align-items: center;
     border-radius: 5px;
     font-size: 16px;
 }
 
+input[type="checkbox"] {
+    padding: 2px;
+    text-align: center;
+    font-size: 16px;
+}
+
 input[type="date"] {
     padding: 10px;
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     align-items: center;
     border-radius: 5px;
     font-size: 16px;
 }
 
 /* Add button styling */
-button {
+.d-flex button {
     padding: 10px 20px;
-    margin-right: 300px;
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
     border: none;
     border-radius: 50px;
     background-color: #38a599;
     color: #fff;
 }
 
+.pagination-buttons button {
+    margin: 200px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 50px;
+    background-color: #38a599;
+    color: #fff;
+}
+
+.add-todo-button button {
+    padding: 10px 20px;
+    font-size: large;
+    margin-bottom: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+    border-radius: 10px;
+    background-color: #38a599;
+    color: #fff;
+}
+
+.pagination-buttons button :hover {
+    background-color: #20776d;
+}
+
 /* Title styling */
 h3 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: xx-large;
     text-align: center;
 }
 
-li {
+.todo-list-item {
     text-align: center;
 }
 
@@ -62,7 +95,7 @@ ul {
 }
 
 label {
-    margin: 10px 0;
+    margin: 5px 0;
     margin-left: 20px;
     text-align: center;
 }

@@ -1,84 +1,59 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
-import { AddTodoForm } from "./AddTodoForm"
 import { TodoFilter } from "./TodoFilter"
 import { TodoList } from "./TodoList"
 import "./style.css"
-import { TodoItem } from "../types/type"
-import { URL } from "../data/UrlApi"
-import NavBar from "./NavBar"
-import axios from "axios"
+import { useCallback, useState } from "react"
+import { GetTodosResponse } from "../types/type"
+import { getTodos } from "../services/todos.services"
+import { useQuery, useQueryClient } from "react-query"
+import { AxiosError } from "axios"
+import { useNavigate } from "react-router-dom"
 
 export const TodoApp = () => {
-    const [todos, setTodos] = useState<TodoItem[]>([])
-    const [ShowCompleted, setShowCompleted] = useState(false)
-    const [loading, setLoading] = useState(true)
+    const queryClient = useQueryClient()
+    const pageSize = 8
+    const [pageNumber, setPageNumber] = useState(1)
+    const [showCompleted, setShowCompleted] = useState(false)
 
-    useEffect(() => {
-        fetch(URL)
-            .then((res) => res.json())
-            .then((response) => setTodos(response))
-            .finally(() => setLoading(false));
-    }, []);
+    const {
+        data: todos,
+        isLoading,
+        error,
+    } = useQuery<GetTodosResponse, AxiosError>(["todos", pageNumber, showCompleted], () => {
+        return getTodos({
+            _page: pageNumber,
+            _limit: pageSize,
+            completed: showCompleted ? true : undefined,
+        })
+    })
 
-    const addTodo = useCallback(
-        async (title: string, duedate: string) => {
-            if (!title || !duedate) {
-                console.warn("Please enter both title and due date");
-                return;
-            }
+    const markTodoCompleted = useCallback((id: number, completed: boolean) => { }, [])
+    const toggleShowCompleted = () => {
+        setShowCompleted(!showCompleted)
+    }
 
-            const newTodo = {
-                id: todos.length + 1,
-                title,
-                duedate,
-                isCompleted: false,
-            };
-
-            try {
-                const response = await axios.post(URL, newTodo);
-                setTodos((prevTodos) => [...prevTodos, response.data]);
-            } catch (error) {
-                console.error('Error adding todo:', error);
-            }
-        },
-        [todos]
-    );
-
-    const displayedTodos = useMemo(
-        () =>
-            ShowCompleted
-                ? todos.filter((todo) => {
-                    return todo.isCompleted === true
-                })
-                : todos,
-        [todos, ShowCompleted]
-    )
-
-    const markTodoCompleted = useCallback((id: number, isCompleted: boolean) => {
-        setTodos(
-            todos.map((todo) => {
-                if (id === todo.id) {
-                    return { ...todo, isCompleted: isCompleted }
-                } else {
-                    return todo
-                }
-            })
-        )
-    }, [todos]);
-
-    let items = ["Home", "Add Todo"];
+    const navigate = useNavigate()
     return (
-        <div style={{ padding: 10 }}>
-            <NavBar
-                navName="TodoApp"
-                navItems={items} />
-            <AddTodoForm addTodo={addTodo} />
-            <TodoFilter showCompleted={ShowCompleted} setShowCompleted={setShowCompleted} />
-            {loading ? (
-                <p style={{ textAlign: "center" }}>Loading...</p>
+        <div className="add-todo-button" style={{ padding: 14 }}>
+            <button onClick={() => navigate("/todos/create")}>Create Todo</button>
+            <TodoFilter showCompleted={showCompleted} setShowCompleted={toggleShowCompleted} />
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <h4>{error.message}</h4>
             ) : (
-                <TodoList todos={displayedTodos} markTodoCompleted={markTodoCompleted} />
+                <TodoList todos={todos || []} markTodoCompleted={markTodoCompleted} />
             )}
+            <div className="pagination-buttons">
+                <button onClick={() => setPageNumber(Math.max(1, pageNumber - 1))} disabled={pageNumber === 1}>
+                    Prev
+                </button>
+                <span>
+                    Page {pageNumber} of {todos?.length ? Math.ceil((todos?.length || 0) / pageSize) : 1}
+                </span>
+                <button onClick={() => setPageNumber(Math.min(Math.ceil(todos?.length || 0 / pageSize), pageNumber + 1))} disabled={pageNumber === Math.ceil(todos?.length || 0 / pageSize)}>
+                    Next
+                </button>
+            </div>
         </div>
-    )
+    );
 };

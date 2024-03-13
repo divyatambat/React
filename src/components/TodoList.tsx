@@ -1,17 +1,15 @@
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react"
 import { TodoItem } from "../types/type"
-import { TodoListItems } from "./TodoListItems"
-import "./style.css";
+import { TodoListItem } from "./TodoListItems"
 
-const TodoListComponents = (props: {
+const TodoListComponent = (props: {
     todos: TodoItem[]
-    markTodoCompleted: (id: number, isCompleted: boolean) => void
+    markTodoCompleted: (id: number, completed: boolean) => void
 }) => {
-
     const [search, setSearch] = useState("")
-    const [sortDirection, setSortDirections] = useState("0");
-
-    const filteredTodos = useMemo(() => props.todos.filter((todo) => todo.title.includes(search)),
+    const [sortDirection, setSortDirection] = useState("0")
+    const filteredTodos = useMemo(
+        () => props.todos.filter((todo) => todo.title.includes(search)),
         [props.todos, search]
     )
 
@@ -25,29 +23,31 @@ const TodoListComponents = (props: {
 
     return (
         <div>
-            <br></br>
-            <h3>TODO List</h3>
-            <input type="text" value={search} placeholder="Search..." onChange={(e) => setSearch(e.target.value)}></input>
-
-            <label>Sort </label>
-            <select onChange={(e) => setSortDirections(e.target.value)}>
-                <option value={0}>A-Z</option>
-                <option value={1}>Z-A</option>
+            <h3>Todo List</h3>
+            <input
+                type="text"
+                value={search}
+                placeholder="Search todos..."
+                onChange={(e) => setSearch(e.target.value)}
+            />
+            <label style={{ margin: "10px" }}>Sort</label>
+            <select style={{ borderBlock: "none", borderRadius: "20px", backgroundColor: "#38a599", padding: "5px", color: "white" }} onChange={(e) => setSortDirection(e.target.value)}>
+                <option value={"0"}>A-Z</option>
+                <option value={"1"}>Z-A</option>
             </select>
-
             <ul>
                 {sortedTodos.map((todo) => (
-                    <TodoListItems
+                    <TodoListItem
                         key={todo.id}
                         id={todo.id}
-                        isCompleted={todo.isCompleted}
+                        completed={todo.isCompleted}
                         title={todo.title}
-                        duedate={todo.duedate}
-                        markTodoCompleted={props.markTodoCompleted} />
+                        markTodoCompleted={props.markTodoCompleted}
+                    />
                 ))}
             </ul>
-        </div>
-    );
+        </div >
+    )
 }
 
-export const TodoList = memo(TodoListComponents)
+export const TodoList = memo(TodoListComponent)

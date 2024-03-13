@@ -1,19 +1,18 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
-import { TodoApp } from './components/TodoApp';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
       </header>
-      <BrowserRouter>
-        <Route path="/" element={<TodoApp />} />
-        <Route path="/home" element={<TodoApp />} />
-        {/* <Route path="/add" element={<div>add</div>} /> */}
-
-      </BrowserRouter>
     </div>
   );
 }

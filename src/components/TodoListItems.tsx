@@ -1,21 +1,29 @@
-import { memo } from "react";
-import "./style.css";
+import { memo } from "react"
+import { Link } from "react-router-dom"
 
-export const TodoListItemsComponents = ({ isCompleted, duedate, title, id, markTodoCompleted, }:
-    {
-        isCompleted: boolean;
-        duedate: string,
-        title: string,
-        id: number,
-        markTodoCompleted: (id: number, isCompleted: boolean) => void
-    }) => {
+const TodoListItemComponent = ({
+    completed,
+    title,
+    id,
+    markTodoCompleted,
+}: {
+    completed: boolean
+    title: string
+    id: number
+    markTodoCompleted: (id: number, completed: boolean) => void
+}) => {
     return (
         <li>
-            <input type="checkbox" checked={isCompleted} onChange={(e) => markTodoCompleted(id, e.target.checked)}></input>
-            <label>{title}</label>
-            <label>{duedate}</label>
+            <input style={{ margin: "10px" }}
+                type="checkbox"
+                checked={completed}
+                onChange={(e) => {
+                    markTodoCompleted(id, e.target.checked)
+                }}
+            ></input>
+            <Link to={`/todos/${id}`}>{title}</Link>
         </li>
     )
 }
 
-export const TodoListItems = memo(TodoListItemsComponents)
+export const TodoListItem = memo(TodoListItemComponent)

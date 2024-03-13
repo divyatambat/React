@@ -43,15 +43,5 @@
 }
 
 .gap-2 {
-    gap: "12px";
-}
-
-.navbar-nav .nav-item .nav-link:hover {
-    color: black;
-    background-color: #f0f0f0;
-}
-
-.filter-container {
-    display: flex;
-    align-items: center;
+    gap: 12px;
 }
