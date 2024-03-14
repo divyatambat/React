@@ -3,11 +3,13 @@ import { Link } from "react-router-dom"
 
 const TodoListItemComponent = ({
     completed,
+    duedate,
     title,
     id,
     markTodoCompleted,
 }: {
     completed: boolean
+    duedate: string
     title: string
     id: number
     markTodoCompleted: (id: number, completed: boolean) => void
@@ -22,6 +24,7 @@ const TodoListItemComponent = ({
                 }}
             ></input>
             <Link to={`/todos/${id}`}>{title}</Link>
+            <label>{duedate}</label>
         </li>
     )
 }

@@ -74,6 +74,11 @@ input[type="date"] {
     color: #fff;
 }
 
+.completed-checkbox {
+    display: flex;
+    text-align: center;
+}
+
 .pagination-buttons button :hover {
     background-color: #20776d;
 }

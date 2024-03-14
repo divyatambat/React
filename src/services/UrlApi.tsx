@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const instance = axios.create({ baseURL: "http://localhost:8000" })
+
 const addDelay = (data: any): Promise<any> =>
     new Promise((res) =>
         setTimeout(() => {

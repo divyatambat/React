@@ -9,14 +9,14 @@ export const TodoFilterComponent = ({
     setShowCompleted: (showCompleted: boolean) => void
 }) => {
     return (
-        <div>
+        <div className="completed-checkbox">
             <input
                 type="checkbox"
                 id="filter"
                 checked={showCompleted}
                 onChange={(e) => setShowCompleted(e.target.checked)}
             />
-            <label htmlFor="filter">Show completed todos</label>
+            <label htmlFor="filter">Show Completed Todos</label>
         </div>
     )
 }

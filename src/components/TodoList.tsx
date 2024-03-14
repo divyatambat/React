@@ -40,6 +40,7 @@ const TodoListComponent = (props: {
                     <TodoListItem
                         key={todo.id}
                         id={todo.id}
+                        duedate={todo.duedate}
                         completed={todo.isCompleted}
                         title={todo.title}
                         markTodoCompleted={props.markTodoCompleted}

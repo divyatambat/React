@@ -20,6 +20,6 @@ export const patchTodo = (id: number, body: PatchTodoBody): Promise<PatchTodoRes
     return PATCH(`/todos/${id}`, body)
 }
 export const postTodo = (body: PostTodoBody): Promise<PostTodoResponse> => {
-    console.log("Insid epost todo")
+    console.log("Inside post todo")
     return POST("/todos", body)
 }
